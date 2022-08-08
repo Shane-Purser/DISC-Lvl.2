@@ -1,8 +1,5 @@
 import random
 
-dice_sides = eval(input("Please enter in numbers e.g. 3, 6 \n How many sides to the dice:"))     # These two lines are used to make the roll_dice function look tidier when it is called on
-dice_number = eval(input(" How many dice: "))
-
 amount_rolled = 0
 
 rolled_numbers = []
@@ -22,7 +19,9 @@ def roll_dice(side_of_dice, number_of_dice):         # Function that has the cod
         number_of_dice -= 1
     print("you rolled these numbers:", rolled_numbers)
 
-
+print("Welcome to the psychic phase" )
+dice_sides = eval(input("Please enter in numbers e.g. 3, 6 \n How many sides to the dice:"))     # These two lines are used to make the roll_dice function look tidier when it is called on
+dice_number = eval(input(" How many dice are you rolling: "))
 roll_dice(dice_sides, dice_number)
 total_amount = sum(rolled_numbers)
 print("You rolled a total of:", total_amount)
