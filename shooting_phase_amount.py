@@ -6,6 +6,8 @@ final_troop_list = []
 
 final_weapon_list = []
 
+final_enemy_list = []
+
 while p == 1:
     amount_rolled = 0
 
@@ -148,38 +150,57 @@ while p == 1:
         i = 0
         hits = 0
         loop = 2
+        saves = 0
+        wounds = 0
         while loop >= 1:
-            loop = 2
+            loop = 3
             print("\n\nWelcome to the Shooting phase")
-            print(final_weapon_list)
-            o = eval(input("If your weapon is on he list enter: 1\nIf your weapon is not on the list enter:2\nEnter:"))
-            if o == 2:
-                selected_weapon = select_weapon()
-                final_weapon_list.append(selected_weapon)
-                print("You have selected ", selected_weapon, "\n\n")
-                loop -= 1
-            elif o == 1:
-                used_weapon = eval(input("What weapon are you using from the list. \nFirst weapon on list is 1 next is 2 esc. \nWeapon:"))
-                selected_weapon = final_weapon_list[used_weapon - 1]
-                loop -= 1
-            else:
-                print("That is not a valid input. Please try again")
-
-            m = eval(input("If your weapon is on he list enter: 1\nIf your weapon is not on the list enter:2\nEnter:"))
-            if m == 2:
-                selected_troop = troop_select()
-                final_troop_list.append(selected_troop)
-                print("You have selected", selected_troop, "\n\n")
-                loop -= 1
-            elif m == 1:
-                used_troop = eval(input("What troop are you using from the list. \nFirst troop on list is 1 next is 2 esc. \nTroop:"))
-                selected_troop = final_troop_list[used_troop - 1]
-                loop -= 1
-            else:
-                print("That is not a valid input. Please try again")
+            while loop == 3:
+                print(final_weapon_list)
+                o = eval(input("If your weapon is on he list enter: 1\nIf your weapon is not on the list enter:2\nEnter:"))
+                if o == 2:
+                    selected_weapon = select_weapon()
+                    final_weapon_list.append(selected_weapon)
+                    print("You have selected ", selected_weapon, "\n\n")
+                    loop -= 1
+                elif o == 1:
+                    used_weapon = eval(input("What weapon are you using from the list. \nFirst weapon on list is 1 next is 2 esc. \nWeapon:"))
+                    selected_weapon = final_weapon_list[used_weapon - 1]
+                    loop -= 1
+                else:
+                    print("That is not a valid input. Please try again")
+            while loop == 2:
+                print(final_troop_list)
+                m = eval(input("If your troop is on he list enter: 1\nIf your troop is not on the list enter:2\nEnter:"))
+                if m == 2:
+                    selected_troop = troop_select()
+                    final_troop_list.append(selected_troop)
+                    print("You have selected", selected_troop, "\n\n")
+                    loop -= 1
+                elif m == 1:
+                    used_troop = eval(input("What troop are you using from the list. \nFirst troop on list is 1 next is 2 esc. \nTroop:"))
+                    selected_troop = final_troop_list[used_troop - 1]
+                    loop -= 1
+                else:
+                    print("That is not a valid input. Please try again")
+            while loop == 1:
+                print(final_enemy_list)
+                z = eval(input("What troop are you shooting\nIf enemy troop is on he list enter: 1\nIf enemy troop is not on the list enter:2\nEnter:"))
+                if z == 2:
+                    enemy_selected_troop = troop_select()
+                    final_enemy_list.append(enemy_selected_troop)
+                    print("You have selected", enemy_selected_troop, "\n\n")
+                    loop -= 1
+                elif z == 1:
+                    used_troop = eval(input("What troop are you attacking from the list. \nFirst troop on list is 1 next is 2 esc. \nTroop:"))
+                    enemy_selected_troop = final_enemy_list[used_troop - 1]
+                    loop -= 1
+                else:
+                    print("That is not a valid input. Please try again")
         dice_sides = eval(input("Please enter in numbers e.g. 3, 6 \nHow many sides to the dice:"))     # These two lines are used to make the roll_dice function look tidier when it is called on
         dice_number = eval(input("How many dice are you rolling: "))
         ballistic_skill = selected_troop[2]
+        save = enemy_selected_troop[3]
         if dice_sides == 3:
             roll_dice(dice_sides, dice_number)
             for numbers in rolled_numbers:
@@ -194,3 +215,24 @@ while p == 1:
                     hits += 1
                 i += 1
             print("You hit the target", hits, " times")
+        else:
+            print("Please enter a number provided")
+        i = 0
+        while hits >= 1:
+            roll_dice(6, 1)
+            if rolled_numbers[i] >= ballistic_skill:
+                wounds += 1
+            i += 1
+            hits -= 1
+            print("You wounded the target", wounds, " times")
+        wound_hits = wounds
+        i = 0
+        while wounds >= 1:
+            roll_dice(6, 1)
+            if rolled_numbers[i] >= save:
+                saves += 1
+            i += 1
+            wounds -= 1
+        print("You saved", saves, "wounds!")
+        successful_wounds = wounds - saves
+        print("You hit the target", successful_wounds, "times for a total of", successful_wounds*final_weapon_list[4], "wounds!!")
