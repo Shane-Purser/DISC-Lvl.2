@@ -38,45 +38,33 @@ while p == 1:
 
         w_name_list = []
 
-        g = 1
-        while g == 1:
-            print("Weapons", w_name_list)
-            weapon_location = eval(input("If weapon was on list enter: 1 \nIf weapon was not on list enter: 2 \nIf you are finished enter: 3\nEnter: "))  # If weapon is in list ask for what weapon it was. If not get a new weapon appended onto the list.
-            if weapon_location == 1:
-                print("Weapons", w_name_list)
-                weapon = eval(input("What weapon is being fired\ne.g. weapon first in list is 1\nWeapon: "))
-                print(weapon_list[weapon - 1], "\nIs this the correct weapon\n")
-                confirm = eval(input("if this is your weapon enter: 1\nIf this is not your weapon enter: 2\n enter: "))
-                if confirm == 1:
-                    return weapon_list[weapon - 1]
-                if confirm != 1:
-                    print("This is not a valid answer. Please enter a different value.")
-
-            elif weapon_location == 2:
-
-                new_weapon = input("What is your weapon called: ")
-                capital_weapon = new_weapon.capitalize()
-                w_name_list.append([])                # makes a list in the weapon list then appends the new weapon to the new list.
-                w_name_list[w].append(capital_weapon)
-                weapon_s = eval(input("What is the weapons strength:"))                             # weapon strength armour pierce and damage
-                weapon_ap = eval(input("What is the weapons armour pierce:"))
-                weapon_d = eval(input("What is the weapons damage:"))
-                w_stats_list.append([])
-                w_stats_list[w].append(weapon_s)
-                w_stats_list[w].append(weapon_ap)
-                w_stats_list[w].append(weapon_d)
-                print("Stats", w_stats_list[w])
-                print("Weapons", w_name_list, "\n\n")
-                weapon_list.append([])
-                weapon_list[w].append(capital_weapon)
-                weapon_list[w].append(weapon_s)
-                weapon_list[w].append(weapon_ap)
-                weapon_list[w].append(weapon_d)
-                w += 1
-            elif weapon_location == 3:
-                print("Thanks for playing")
-            else:
-                print("Please enter a different value")
+        new_weapon = input("What is your weapon called: ")    # because of the new code down lower I no longer need the questions and if statements at the start of this block of code
+        capital_weapon = new_weapon.capitalize()
+        w_name_list.append([])                # makes a list in the weapon list then appends the new weapon to the new list.
+        w_name_list[w].append(capital_weapon)
+        weapon_s = eval(input("What is the weapons strength:"))                             # weapon strength armour pierce and damage
+        weapon_ap = eval(input("What is the weapons armour pierce:"))
+        weapon_d = eval(input("What is the weapons damage:"))
+        w_stats_list.append([])
+        w_stats_list[w].append(weapon_s)
+        w_stats_list[w].append(weapon_ap)
+        w_stats_list[w].append(weapon_d)
+        print("Stats", w_stats_list[w])
+        print("Weapons", w_name_list, "\n\n")
+        weapon_list.append([])
+        weapon_list[w].append(capital_weapon)
+        weapon_list[w].append(weapon_s)
+        weapon_list[w].append(weapon_ap)
+        weapon_list[w].append(weapon_d)
+        w += 1
+        print("Weapons", w_name_list)
+        weapon = eval(input("What weapon is being fired\ne.g. weapon first in list is 1\nWeapon: "))
+        print(weapon_list[weapon - 1], "\nIs this the correct weapon\n")
+        confirm = eval(input("if this is your weapon enter: 1\nIf this is not your weapon enter: 2\n enter: "))
+        if confirm == 1:
+            return weapon_list[weapon - 1]
+        if confirm != 1:
+            print("This is not a valid answer. Please enter a different value.")
 
 
     def troop_select():
@@ -153,11 +141,11 @@ while p == 1:
         saves = 0
         wounds = 0
         while loop >= 1:
-            loop = 3
+            loop = 4
             print("\n\nWelcome to the Shooting phase")
             while loop == 3:
                 print(final_weapon_list)
-                o = eval(input("If your weapon is on he list enter: 1\nIf your weapon is not on the list enter:2\nEnter:"))
+                o = eval(input("If your weapon is on he list enter: 1\nIf your weapon is not on the list enter:2\nEnter:"))  # User selects weather their weapon is already in the list or if they have to add it
                 if o == 2:
                     selected_weapon = select_weapon()
                     final_weapon_list.append(selected_weapon)
@@ -201,6 +189,7 @@ while p == 1:
         dice_number = eval(input("How many dice are you rolling: "))
         ballistic_skill = selected_troop[2]
         save = enemy_selected_troop[3]
+        rolled_numbers = []
         if dice_sides == 3:
             roll_dice(dice_sides, dice_number)
             for numbers in rolled_numbers:
@@ -218,6 +207,7 @@ while p == 1:
         else:
             print("Please enter a number provided")
         i = 0
+        rolled_numbers = []
         while hits >= 1:
             roll_dice(6, 1)
             if rolled_numbers[i] >= ballistic_skill:
@@ -227,6 +217,7 @@ while p == 1:
             print("You wounded the target", wounds, " times")
         wound_hits = wounds
         i = 0
+        rolled_numbers = []
         while wounds >= 1:
             roll_dice(6, 1)
             if rolled_numbers[i] >= save:
@@ -235,4 +226,5 @@ while p == 1:
             wounds -= 1
         print("You saved", saves, "wounds!")
         successful_wounds = wounds - saves
-        print("You hit the target", successful_wounds, "times for a total of", successful_wounds*final_weapon_list[4], "wounds!!")
+        final_wounds = successful_wounds*final_weapon_list[3]
+        print("You hit the target", successful_wounds, "times for a total of", final_wounds, "wounds!!")
