@@ -239,7 +239,7 @@ while p == 1:
         successful_wounds = wounds - saves
         final_wounds = successful_wounds*final_weapon_list[3]
         print("You hit the target", successful_wounds, "times for a total of", final_wounds, "wounds!!")
-        game == 0
+        game = 0
     while game == 2:
         print("Welcome to the psychic phase")
         dice_sides = eval(input("Please enter in numbers e.g. 3, 6 \n How many sides to the dice:"))     # These two lines are used to make the roll_dice function look tidier when it is called on
@@ -252,4 +252,4 @@ while p == 1:
             roll_dice(dice_sides, dice_number)
             total_amount = sum(rolled_numbers)
             print("You rolled a total of:", total_amount)
-        game == 0
+        game = 0
