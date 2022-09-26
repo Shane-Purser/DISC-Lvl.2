@@ -141,7 +141,7 @@ while p == 1:
                     print("The number you inputted was not valid please try again")
 
     game = eval(input("What phase are you in\nIf in shooting phase enter:1\nIf in psychic phase enter 2:\nEnter:"))
-    while game == 1:
+    if game == 1:
         i = 0
         hits = 0
         loop = 2
@@ -240,7 +240,7 @@ while p == 1:
         final_wounds = successful_wounds*final_weapon_list[3]
         print("You hit the target", successful_wounds, "times for a total of", final_wounds, "wounds!!")
         game = 0
-    while game == 2:
+    elif game == 2:
         print("Welcome to the psychic phase")
         dice_sides = eval(input("Please enter in numbers e.g. 3, 6 \n How many sides to the dice:"))     # These two lines are used to make the roll_dice function look tidier when it is called on
         dice_number = eval(input("How many dice are you rolling: "))
@@ -253,3 +253,5 @@ while p == 1:
             total_amount = sum(rolled_numbers)
             print("You rolled a total of:", total_amount)
         game = 0
+    else:
+        print("Please enter one of the numbers provided")
