@@ -6,6 +6,7 @@ rolled_numbers = []
 
 game = 1
 
+run = True
 
 p = 1
 
@@ -38,45 +39,50 @@ while p == 1:
 
 
     def select_weapon():
-        w = 0
 
-        weapon_list = []            # list all weapons will be stored in
+        p = 0
+        while p == 0:
 
-        w_stats_list = []
+            w = 0
 
-        w_name_list = []
-        while p == 1:
-            new_weapon = input("What is your weapon called: ")    # because of the new code down lower I no longer need the questions and if statements at the start of this block of code
-            capital_weapon = new_weapon.capitalize()
-            w_name_list.append([])                # makes a list in the weapon list then appends the new weapon to the new list.
-            w_name_list[w].append(capital_weapon)
-            weapon_s = eval(input("What is the weapons strength:"))                             # weapon strength armour pierce and damage
-            weapon_ap = eval(input("What is the weapons armour pierce:"))
-            weapon_d = eval(input("What is the weapons damage:"))
-            w_stats_list.append([])
-            w_stats_list[w].append(weapon_s)
-            w_stats_list[w].append(weapon_ap)
-            w_stats_list[w].append(weapon_d)
-            print("Stats", w_stats_list[w])
-            print("Weapons", w_name_list, "\n\n")
-            weapon_list.append([])
-            weapon_list[w].append(capital_weapon)
-            weapon_list[w].append(weapon_s)
-            weapon_list[w].append(weapon_ap)
-            weapon_list[w].append(weapon_d)
-            w += 1
-            f = 1
-            while f == 1:
-                print("Weapons: ", w_name_list)
-                weapon = eval(input("What weapon is being fired\ne.g. weapon first in list is 1\nWeapon: "))
-                print(weapon_list[weapon - 1], "\nIs this the correct weapon\n")
-                confirm = eval(input("if this is your weapon enter: 1\nIf this is not your weapon enter: 2\n enter: "))
-                if confirm == 1:
-                    return weapon_list[weapon - 1]
-                elif confirm == 2:
-                    f -= 1
-                else:
-                    print("The number you inputted was not valid please try again")
+            weapon_list = []            # list all weapons will be stored in
+
+            w_stats_list = []
+
+            w_name_list = []
+            while p == 0:
+                new_weapon = input("What is your weapon called: ")    # because of the new code down lower I no longer need the questions and if statements at the start of this block of code
+                capital_weapon = new_weapon.capitalize()
+                w_name_list.append([])                # makes a list in the weapon list then appends the new weapon to the new list.
+                w_name_list[w].append(capital_weapon)
+                weapon_s = eval(input("What is the weapons strength:"))                             # weapon strength armour pierce and damage
+                weapon_ap = eval(input("What is the weapons armour pierce:"))
+                weapon_d = eval(input("What is the weapons damage:"))
+                w_stats_list.append([])
+                w_stats_list[w].append(weapon_s)
+                w_stats_list[w].append(weapon_ap)
+                w_stats_list[w].append(weapon_d)
+                print("Stats", w_stats_list[w])
+                print("Weapons", w_name_list, "\n\n")
+                weapon_list.append([])
+                weapon_list[w].append(capital_weapon)
+                weapon_list[w].append(weapon_s)
+                weapon_list[w].append(weapon_ap)
+                weapon_list[w].append(weapon_d)
+                w += 1
+                f = 1
+                while f == 1:
+                    print("Weapons: ", w_name_list)
+                    weapon = eval(input("What weapon is being fired\ne.g. weapon first in list is 1\nWeapon: "))
+                    print(weapon_list[weapon - 1], "\nIs this the correct weapon\n")
+                    confirm = eval(input("if this is your weapon enter: 1\nIf this is not your weapon enter: 2\n enter: "))
+                    if confirm == 1:
+                        p = 1
+                        return weapon_list[weapon - 1]
+                    elif confirm == 2:
+                        f -= 1
+                    else:
+                        print("The number you inputted was not valid please try again")
 
 
     def troop_select():
@@ -152,45 +158,45 @@ while p == 1:
             print("\n\nWelcome to the Shooting phase")
             while loop == 4:
                 print(final_weapon_list)
-                o = eval(input("If your weapon is on he list enter: 1\nIf your weapon is not on the list enter:2\nEnter:"))  # User selects weather their weapon is already in the list or if they have to add it
+                o = eval(input("If your weapon is on the list enter: 1\nIf your weapon is not on the list enter:2\nEnter:"))  # User selects weather their weapon is already in the list or if they have to add it
                 if o == 2:
                     selected_weapon = select_weapon()
                     final_weapon_list.append(selected_weapon)
                     print("You have selected ", selected_weapon, "\n\n")
-                    loop -= 1
+                    loop = 3
                 elif o == 1:
                     print(final_weapon_list)
                     used_weapon = eval(input("What weapon are you using from the list. \nFirst weapon on list is 1 next is 2 esc. \nWeapon:"))
                     selected_weapon = final_weapon_list[used_weapon - 1]
-                    loop -= 1
+                    loop = 3
                 else:
                     print("That is not a valid input. Please try again")
-            while loop == 2:
+            while loop == 3:
                 print(final_troop_list)
                 m = eval(input("If your troop is on he list enter: 1\nIf your troop is not on the list enter:2\nEnter:"))
                 if m == 2:
                     selected_troop = troop_select()
                     final_troop_list.append(selected_troop)
                     print("You have selected", selected_troop, "\n\n")
-                    loop -= 1
+                    loop = 2
                 elif m == 1:
                     used_troop = eval(input("What troop are you using from the list. \nFirst troop on list is 1 next is 2 esc. \nTroop:"))
                     selected_troop = final_troop_list[used_troop - 1]
-                    loop -= 1
+                    loop = 2
                 else:
                     print("That is not a valid input. Please try again")
-            while loop == 1:
+            while loop == 2:
                 print(final_enemy_list)
                 z = eval(input("What troop are you shooting\nIf enemy troop is on he list enter: 1\nIf enemy troop is not on the list enter:2\nEnter:"))
                 if z == 2:
                     enemy_selected_troop = troop_select()
                     final_enemy_list.append(enemy_selected_troop)
                     print("You have selected", enemy_selected_troop, "\n\n")
-                    loop -= 1
+                    loop = 1
                 elif z == 1:
                     used_troop = eval(input("What troop are you attacking from the list. \nFirst troop on list is 1 next is 2 esc. \nTroop:"))
                     enemy_selected_troop = final_enemy_list[used_troop - 1]
-                    loop -= 1
+                    loop = 1
                 else:
                     print("That is not a valid input. Please try again")
         dice_sides = eval(input("Please enter in numbers e.g. 3, 6 \nHow many sides to the dice:"))     # These two lines are used to make the roll_dice function look tidier when it is called on
@@ -217,6 +223,8 @@ while p == 1:
             print("Please enter a number provided")
         i = 0
         rolled_numbers = []
+        ap = selected_weapon[2]
+        print(ap)
         while hits >= 1:
             roll_dice(6, 1)
             if rolled_numbers[i] >= ballistic_skill:
@@ -229,7 +237,7 @@ while p == 1:
         rolled_numbers = []
         while wounds >= 1:
             roll_dice(6, 1)
-            if rolled_numbers[i] >= save:
+            if rolled_numbers[i] >= save + ap:
                 saves += 1
             if rolled_numbers[i] >= iv_save:
                 saves += 1
